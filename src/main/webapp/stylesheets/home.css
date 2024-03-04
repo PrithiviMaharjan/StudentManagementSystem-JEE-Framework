@@ -1,0 +1,46 @@
+@charset "ISO-8859-1";
+.users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  width: 30%;
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #333; /* Black color */
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #000; /* Black color */
+  color: #fff; /* White color */
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #333; /* Darker shade of black */
+}
