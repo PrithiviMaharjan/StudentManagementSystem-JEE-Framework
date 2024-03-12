@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.database.DBController;
+import model.LoginModel;
 
 /**
  * Name: Prithivi Maharjan Email: prithivi.maharjan18@gmail.com
@@ -26,7 +27,8 @@ public class LoginServlet extends HttpServlet {
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		int loginResult = dbController.getStudentLoginInfo(userName, password);
+		LoginModel loginModel = new LoginModel(userName, password);
+		int loginResult = dbController.getStudentLoginInfo(loginModel);
 
 		if (loginResult == 1) {
 		    response.sendRedirect(request.getContextPath() + "/pages/welcome.html");
