@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
 		if (loginResult == 1) {
 		    response.sendRedirect(request.getContextPath() + "/pages/welcome.html");
 		} else {
+			// Code will be written in later weeks
 		}
 	}
 }

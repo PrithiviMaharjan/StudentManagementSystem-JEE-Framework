@@ -20,7 +20,7 @@ public class DBController {
 
 	public int registerStudent(StudentModel student) {
 		try {
-			PreparedStatement stmt = getConnection().prepareStatement(StringUtils.REGISTER_STUDENT_QUERY);
+			PreparedStatement stmt = getConnection().prepareStatement(StringUtils.QUERY_REGISTER_STUDENT);
 
 			stmt.setString(1, student.getFirstName());
 			stmt.setString(2, student.getLastName());
@@ -48,26 +48,26 @@ public class DBController {
 	}
 	
 	public int getStudentLoginInfo(String username, String password) {
-		try (Connection con = getConnection()) {
-			PreparedStatement st = con.prepareStatement(StringUtils.GET_LOGIN_STUDENT_INFO);
+		try {
+			PreparedStatement st = getConnection().prepareStatement(StringUtils.QUERY_LOGIN_USER_CHECK);
 			st.setString(1, username);
 			ResultSet result = st.executeQuery();
 
 			if (result.next()) {
 				// User name and password match in the database
-				String userDb = result.getString("user_name");
-				String passwordDb = result.getString("password");
+				String userDb = result.getString(StringUtils.USER_NAME);
+				String passwordDb = result.getString(StringUtils.PASSWORD);
 				
 				if (userDb.equals(username) && passwordDb.equals(password))
 					return 1;
 				else
 					return 0;
 			}else {
-				return 0;
+				return -1;
 			}
 		} catch (SQLException | ClassNotFoundException ex) {
 			ex.printStackTrace(); // Log the exception for debugging
-			return -1;
+			return -2;
 		}
 	}
 
