@@ -18,7 +18,6 @@ import utils.StringUtils;
  * accordingly based on the login result.
  *
  * @author [Prithivi Maharjan, prithivi.maharjan18@gmail.com]
- * @WebServlet(urlPatterns = StringUtils.SERVLET_URL_LOGIN, asyncSupported = true)
  */
 @WebServlet(urlPatterns = StringUtils.SERVLET_URL_LOGIN, asyncSupported = true)
 public class LoginServlet extends HttpServlet {
