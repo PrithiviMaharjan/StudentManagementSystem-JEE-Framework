@@ -5,7 +5,6 @@ public class LoginModel {
 	private String password;
 	
 	public LoginModel(String username, String password) {
-		super();
 		this.username = username;
 		this.password = password;
 	}

@@ -135,4 +135,23 @@ public class DBController {
 	        return -2;
 	    }
 	}
+	
+	public Boolean checkEmailIfExists(String email) {
+	    // TODO: Implement logic to check if the provided email address exists in the database
+	    // This method should likely query the database using DBController and return true if the email exists, false otherwise.
+	    return false;
+	}
+
+	public Boolean checkNumberIfExists(String number) {
+	    // TODO: Implement logic to check if the provided phone number exists in the database
+	    // This method should likely query the database using DBController and return true if the phone number exists, false otherwise.
+	    return false;
+	}
+
+	public Boolean checkUsernameIfExists(String username) {
+	    // TODO: Implement logic to check if the provided username exists in the database
+	    // This method should likely query the database using DBController and return true if the username exists, false otherwise.
+	    return false;
+	}
+
 }
