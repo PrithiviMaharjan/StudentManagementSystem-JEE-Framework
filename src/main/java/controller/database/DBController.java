@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.LoginModel;
+import model.PasswordEncryptionWithAes;
 import model.StudentModel;
 import utils.StringUtils;
 
@@ -58,7 +59,8 @@ public class DBController {
 	        stmt.setString(6, student.getPhoneNumber());
 	        stmt.setString(7, student.getSubject());
 	        stmt.setString(8, student.getUsername());
-	        stmt.setString(9, student.getPassword());
+	        stmt.setString(9, PasswordEncryptionWithAes.encrypt(
+	        		student.getUsername(), student.getPassword()));
 
 	        // Execute the update statement and store the number of affected rows
 	        int result = stmt.executeUpdate();
@@ -92,7 +94,6 @@ public class DBController {
 	 * @throws ClassNotFoundException if the JDBC driver class is not found.
 	 */
 	public int getStudentLoginInfo(LoginModel loginModel) {
-
 	    // Try-catch block to handle potential SQL or ClassNotFound exceptions
 	    try {
 	        // Prepare a statement using the predefined query for login check
@@ -111,11 +112,12 @@ public class DBController {
 	            String userDb = result.getString(StringUtils.USER_NAME);
 
 	            // Get the password from the database
-	            String passwordDb = result.getString(StringUtils.PASSWORD);
+	            String encryptedPwd = result.getString(StringUtils.PASSWORD);
 
+	            String decryptedPwd = PasswordEncryptionWithAes.decrypt(encryptedPwd, userDb);
 	            // Check if the username and password match the credentials from the database
 	            if (userDb.equals(loginModel.getUsername()) 
-	            		&& passwordDb.equals(loginModel.getPassword())) {
+	            		&& decryptedPwd.equals(loginModel.getPassword())) {
 	                // Login successful, return 1
 	                return 1;
 	            } else {

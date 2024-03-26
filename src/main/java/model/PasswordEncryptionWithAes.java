@@ -25,7 +25,6 @@ public class PasswordEncryptionWithAes {
     private static final int IV_LENGTH_BYTE = 12;
     private static final int SALT_LENGTH_BYTE = 16;
     private static final Charset UTF_8 = StandardCharsets.UTF_8;
-
    
     public static byte[] getRandomNonce(int numBytes) {
         byte[] nonce = new byte[numBytes];
@@ -58,7 +57,7 @@ public class PasswordEncryptionWithAes {
     }
 
     // return a base64 encoded AES encrypted text
-    public static String encrypt(String employee_id, String password){
+    public static String encrypt(String username, String password){
     	try {
 		    // 16 bytes salt
 		    byte[] salt = getRandomNonce(SALT_LENGTH_BYTE);
@@ -67,7 +66,7 @@ public class PasswordEncryptionWithAes {
 		    byte[] iv = getRandomNonce(IV_LENGTH_BYTE);
 		
 		    // secret key from password
-		    SecretKey aesKeyFromPassword = getAESKeyFromPassword(employee_id.toCharArray(), salt);
+		    SecretKey aesKeyFromPassword = getAESKeyFromPassword(username.toCharArray(), salt);
 		
 		    Cipher cipher = Cipher.getInstance(ENCRYPT_ALGO);
 		

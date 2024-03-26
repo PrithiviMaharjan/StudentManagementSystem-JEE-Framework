@@ -3,9 +3,11 @@ package controller.servlets;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.database.DBController;
 import model.LoginModel;
@@ -53,6 +55,14 @@ public class LoginServlet extends HttpServlet {
         // Handle login results with appropriate messages and redirects
         if (loginResult == 1) {
             // Login successful
+        	HttpSession userSession = request.getSession();
+			userSession.setAttribute("username", userName);
+			userSession.setMaxInactiveInterval(30*30);
+			
+			Cookie userCookie= new Cookie("user", userName);
+			userCookie.setMaxAge(30*60);
+			response.addCookie(userCookie);
+			
             request.setAttribute(StringUtils.MESSAGE_SUCCESS, StringUtils.MESSAGE_SUCCESS_LOGIN);
             response.sendRedirect(request.getContextPath() + StringUtils.PAGE_URL_WELCOME);
         } else if (loginResult == 0) {

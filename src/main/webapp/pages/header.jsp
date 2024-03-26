@@ -1,10 +1,11 @@
+<%@page import="utils.StringUtils"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="javax.servlet.http.HttpServletRequest"%>
 
 <%
     // Get the session and request objects
     HttpSession userSession = request.getSession();
-    String currentUser = (String) userSession.getAttribute("username");
+    String currentUser = (String) userSession.getAttribute(StringUtils.USERNAME);
     String contextPath = request.getContextPath();
 %>
 
@@ -20,17 +21,17 @@
                 <form action="<%
                     // Conditionally set the action URL based on user session
                     if (currentUser != null) {
-                        out.print(contextPath + "/LogoutServlet");
+                        out.print(contextPath + StringUtils.SERVLET_URL_LOGOUT);
                     } else {
-                        out.print(contextPath + "/pages/login.jsp");
+                        out.print(contextPath + StringUtils.PAGE_URL_LOGIN);
                     }
                 %>" method="post">
                     <input type="submit" value="<%
                         // Conditionally set the button label based on user session
                         if (currentUser != null) {
-                            out.print("Logout");
+                            out.print(StringUtils.LOGOUT);
                         } else {
-                            out.print("Login");
+                            out.print(StringUtils.LOGIN);
                         }
                     %>"/>
                 </form>
